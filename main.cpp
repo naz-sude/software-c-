@@ -1,46 +1,72 @@
 #include <iostream>
 #include <string>
-
+#include <iomanip>
 using namespace std;
 
-class Date {
+
+class Employee {
 private:
-    int month, day, year;
+    string name;
+    int idNumber;
+    string department;
+    string position;
 
 public:
-    Date(int m, int d, int y) : month(m), day(d), year(y) {}
 
-    void print_date() const {
-        cout << month << "/" << day << "/" << year << endl;
+    Employee(string n, int id, string dept, string posit) {
+        name = n;
+        idNumber = id;
+        department = dept;
+        position = posit;
     }
 
-    void print_date_long() const {
-        string months[12] = {"January", "February", "March", "April", "May", "June",
-                             "July", "August", "September", "October", "November", "December"};
-        cout << months[month - 1] << " " << day << ", " << year << endl;
+
+    Employee(string n, int id) {
+        name = n;
+        idNumber = id;
+        department = "";
+        position = "";
     }
 
-    void print_date_reverse() const {
-        string months[13] = {"", "January", "February", "March", "April", "May", "June",
-                             "July", "August", "September", "October", "November", "December"};
-        cout << day << " " << months[month - 1] << " " << year << endl;
+
+    Employee() {
+        name = "";
+        idNumber = 0;
+        department = "";
+        position = "";
     }
+
+
+    void setName(string n) {
+        name = n; }
+    void setIdNumber(int id) {
+        idNumber = id; }
+    void setDepartment(string dept) {
+        department = dept; }
+    void setPosition(string posit) {
+        position = posit; }
+
+
+    string getName() {
+        return name; }
+    int getIdNumber() {
+        return idNumber; }
+    string getDepartment() {
+         return department; }
+    string getPosition() {
+        return position; }
 };
-
 int main() {
-    int month, day, year;
+    Employee e1("Susan Meyers", 47899, "Accounting", "Vice President");
+    Employee e2("Mark Jones", 39119, "IT", "Programmer");
+    Employee e3("Joy Rogers", 81774, "Manufacturing", "Engineer");
 
-    cout << "Enter month(1-12), day(1-31), and year (separated by spaces): ";
-    cin >> month >> day >> year;
-
-    if ((1 <= month && month <= 12) && (1 <= day && day <= 31)) {
-        Date date(month, day, year);
-        date.print_date();
-        date.print_date_long();
-        date.print_date_reverse();
-    } else {
-        cout << "Invalid input for month or day." << endl;
-    }
+    cout<< setw(20) << "Name" << setw(20) << "ID Number" << setw(20) << "Department" << setw(20) << "Position" << endl;
+    cout << setfill('-') << setw(70) << "-" << endl;
+    cout << setfill(' ');
+    cout << setw(20)<< e1.getName()<< setw(20) << e1.getIdNumber()<< setw(20)<< e1.getDepartment()<< setw(20) << e1.getPosition() << "\n";
+    cout<< setw(20) << e2.getName() << setw(20) << e2.getIdNumber()<< setw(20)<< e2.getDepartment() << setw(20)<< e2.getPosition() << "\n";
+    cout << setw(20) << e3.getName()<< setw(20) << e3.getIdNumber() << setw(20)<<e3.getDepartment()<< setw(20) << e3.getPosition() << "\n";
 
     return 0;
 }
