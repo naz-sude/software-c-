@@ -1,0 +1,81 @@
+#include <iostream>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+class NumberArray {
+private:
+    float* array;
+    int size;
+
+public:
+    
+    NumberArray(int size) {
+        this->size = size;
+        array = new float[size];
+    }
+
+    
+    ~NumberArray() {
+        delete[] array;
+    }
+
+    
+    void setNumber(int index, float number) {
+        if (index >= 0 && index < size) {
+            array[index] = number;
+        } else {
+            cerr << "Index out of range" << endl;
+        }
+    }
+
+    
+    float getNumber(int index) const {
+        if (index >= 0 && index < size) {
+            return array[index];
+        } else {
+            cerr << "Index out of range" << endl;
+            return 0;
+        }
+    }
+
+    
+    float getMax() const {
+        return *max_element(array, array + size);
+    }
+
+    
+    float getMin() const {
+        return *min_element(array, array + size);
+    }
+
+    
+    float getAverage() const {
+        float sum = accumulate(array, array + size, 0.0f);
+        return size ? (sum / size) : 0;
+    }
+};
+
+int main() {
+    int size;
+    cout << "Enter the number of elements: ";
+    cin >> size;
+
+    NumberArray numbers(size); 
+
+   
+    float number;
+    for (int i = 0; i < size; ++i) {
+        cout << "Enter number " << (i + 1) << ": ";
+        cin >> number;
+        numbers.setNumber(i, number);
+    }
+
+    
+    cout << "Highest : " << numbers.getMax() << endl;
+    cout << "Lowest : " << numbers.getMin() << endl;
+    cout << "Average of numbers: " << numbers.getAverage() << endl;
+
+    return 0;
+}
