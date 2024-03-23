@@ -1,0 +1,80 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+
+class Die {
+private:
+    int sides;
+public:
+    Die(int numSides) {
+        sides = numSides;
+    }
+    int roll() {
+        return rand() % sides + 1;
+    }
+};
+
+int main() {
+
+    Die die(6);
+
+
+    srand(time(0));
+
+    int totalPoints = 0;
+
+
+    char choice;
+    do {
+        cout << "Would you like to continue fishing? (Y/N): ";
+        cin >> choice;
+
+        if (choice == 'Y' || choice == 'y') {
+
+            int rollResult = die.roll();
+
+
+            switch (rollResult) {
+                case 1:
+                        cout << "You caught a huge fish! +5 points\n";
+                        totalPoints += 5;
+                        break;
+                    case 2:
+                        cout << "You caught an old shoe! +1 point\n";
+                        totalPoints += 1;
+                        break;
+                    case 3:
+                        cout << "You caught a little fish! +3 points\n";
+                        totalPoints += 3;
+                        break;
+                    case 4:
+                        cout << "You caught a seaweed! +1 point\n";
+                        totalPoints += 1;
+                        break;
+                    case 5:
+                        cout << "You caught a crab! +2 points\n";
+                        totalPoints += 2;
+                        break;
+                    case 6:
+                        cout << "You caught a starfish! +2 points\n";
+                        totalPoints += 2;
+                        break;
+                    default:
+                        break;
+                }
+        }
+    } while (choice == 'y' || choice == 'Y');
+
+
+    cout << "Total fishing score:" << totalPoints << endl;
+    if (totalPoints >= 10) {
+        cout << "Congratulations! You've become a great fisherman!" << endl;
+    } else {
+        cout << "Better luck next time!" << endl;
+    }
+
+    return 0;
+}
