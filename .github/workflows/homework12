@@ -1,0 +1,53 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+class Coin {
+private:
+    string sideUp;
+
+public:
+    Coin() {
+        toss();
+    }
+
+    void toss() {
+        if (rand() % 2 == 0) {
+            sideUp = "heads";
+        } else {
+            sideUp = "tails";
+        }
+    }
+
+    string getSideUp() const {
+        return sideUp;
+    }
+};
+
+int main() {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    Coin myCoin;
+
+    cout << "Initially facing up: " << myCoin.getSideUp() << endl;
+
+    int headsCount = 0;
+    int tailsCount = 0;
+
+    for (int i = 0; i < 20; ++i) {
+        myCoin.toss();
+        cout << "Toss " << i + 1 << ": " << myCoin.getSideUp() << endl;
+
+        if (myCoin.getSideUp() == "heads") {
+            headsCount++;
+        } else {
+            tailsCount++;
+        }
+    }
+
+    cout << "\nNumber of times heads facing up: " << headsCount << endl;
+    cout << "Number of times tails facing up: " << tailsCount << endl;
+
+    return 0;
+}
